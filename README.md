@@ -66,5 +66,93 @@ WHERE payment_date BETWEEN '2007-02-07' AND '2007-02-15';
 ```
 
 ## IN
+to check if value matches any value of list. List of values can be set of select statements
+
+value IN (SELECT value FROM table)
+
+IN is shortcut for nested ORs
+
+```
+SELECT customer_id, rental_id, return_date 
+FROM rental 
+WHERE customer_id NOT IN(1,2,13) 
+ORDER BY return_date DESC;
+```
 
 ## LIKE
+how to find a name say 
+```
+SELECT first_name, last_name
+FROM customer
+WHERE first_name LIKE 'Jen%'
+```
+uses pattern matching in the second
+string with wild card characters
+Perent % for any sequence of characters, underscore _ for matching any single character. So _ is 1 char, __ is 2 chars. 
+
+Post gres allows you to do ILIKE, so you can ignore string
+ILIKE ignores case
+
+### CHALLENGES
+1. How many payment transactions were greater than $5.00?
+ans: SELECT COUNT(*) FROM payment WHERE amount > 5;
+3,618
+
+2. how many actors have a first name that starts with P?
+ans: SELECT COUNT(*) FROM actor WHERE first_name LIKE 'P%';
+return 5
+
+3. How many unique districts are our cuspstomers from?
+ans: SELECT COUNT( DISTINCT district) FROM address;
+
+4. List of names from those distinct districts in last question
+SELECT DISTINCT district FROM address;
+
+5. How many films have a rating of R and cose replacement between 5 and 15?
+```
+SELECT COUNT(*) FROM film 
+WHERE rating = 'R' 
+AND replacement_cost BETWEEN 5 AND 15;
+```
+
+6. How many films have the word Truman somewhere in the title?
+```
+SELECT COUNT(title) FROM film 
+WHERE title LIKE '%Truman%';
+```
+
+## MIN MAX AVG SUM
+aggregate functions
+```
+SELECT ROUND( AVG(amount), 2) FROM payment; // 4.20
+SELECT COUNT(*) FROM payment WHERE amount=0.00; // MIN
+
+```
+
+## GROUP BY
+divides rows returned into groups
+aggregates all info into a single value
+```
+SELECT col1, aggregate function
+FROM table
+GROUP BY col1
+
+SELECT customer_id, SUM(amount)
+FROM payment
+GROUP BY customer_id;
+
+// select column you are grouping by
+
+SELECT staff_id, COUNT(payment)
+FROM payment
+GROUP BY staff_id;
+
+// counts rows that statement is returning back
+// takes all instances of staff id and increments by count
+
+SELECT rating, AVG(rental_rate) 
+FROM film
+GROUP BY rating;
+```
+
+### challenges
