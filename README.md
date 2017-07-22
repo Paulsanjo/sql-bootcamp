@@ -201,4 +201,30 @@ select and use where clause to get rating no aggregate function
 then having to get having avg
 
 challenge
+1. customer has at least a total of 40 transaction payments
+what customers by customer_id are eligible?
 
+```
+SELECT customer_id, COUNT(amount)
+FROM payment
+GROUP BY customer_id
+HAVING COUNT(amount) >= 40;
+```
+
+2. when grouped by rating, what movie ratings have an avg rental duration of more than 5 days
+```
+SELECT rating, ROUND(AVG(rental_duration), 2)
+FROM film
+GROUP BY rating
+HAVING AVG(rental_duration) > 5;
+```
+
+[See assessment 1](assessments/assessment1.md)
+
+
+# Part 2
+
+## AS
+for joins, asigns alias name to columns
+
+JOINS
