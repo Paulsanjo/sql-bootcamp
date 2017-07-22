@@ -156,3 +156,33 @@ GROUP BY rating;
 ```
 
 ### challenges
+We have two staff members id 1 and 2
+give bonus to member with most payments
+
+how many payments each staff member handle?
+how much was total amount?
+
+```
+SELECT staff_id, COUNT(staff_id), SUM(staff_id)
+FROM payment
+GROUP BY staff_id ORDER BY COUNT(staff_id) DESC;
+```
+
+2. Corporate HQ want to know avg replacemnt cost of movies by rating.
+
+```
+SELECT rating, ROUND(AVG(replacement_cost), 2)
+FROM film
+GROUP BY rating ORDER BY AVG(replacement_cost) DESC;
+```
+
+3. send coupons to 5 customers who have spend the most amount of money.
+get customer ids of top 5 spenders
+
+```
+SELECT customer_id, SUM(amount)
+FROM payment 
+GROUP BY customer_id ORDER BY SUM(amount) DESC
+LIMIT 5;
+```
+
