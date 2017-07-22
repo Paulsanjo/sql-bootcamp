@@ -227,4 +227,76 @@ HAVING AVG(rental_duration) > 5;
 ## AS
 for joins, asigns alias name to columns
 
-JOINS
+## JOINS
+relate data in 1 table to data in another
+INNER JOIN, OUTER JOIN, SELF JOIN
+
+tables A and B
+A 
+is primary k is integer
+c1 is fullname
+
+B
+key is pkb
+c2 is custmer name
+foreign key is a
+
+```
+SELECT A.pka, A.c1, B.pkb, B.c2
+FROM A
+INNER JOIN B ON A.pka = B.fka
+```
+
+INNER JOIN is what is in A and B, intersection of A and B
+```
+SELECT 
+customer.customer_id, 
+first_name, 
+last_name,
+amount,
+payment_date
+FROM customer
+INNER JOIN payment ON customer.customer_id = payment.customer_id;
+```
+
+Only need first_name instead of customer, because it is only in a single table
+```
+SELECT 
+customer.customer_id, 
+first_name, 
+last_name,
+amount,
+payment_date
+FROM customer
+INNER JOIN payment ON customer.customer_id = payment.customer_id
+WHERE customer.customer_id = 2 //
+ORDER BY first_name; // use order by
+```
+
+INNER JOIN, you can just write JOIN <-- it is the default
+
+```
+SELECT store_id, title, COUNT(title)
+FROM inventory
+JOIN film ON inventory.film_id = film.film_id
+GROUP BY title, store_id ORDER BY store_id, COUNT(title) DESC;
+```
+
+```
+SELECT title, COUNT(title) AS copies_at_store1
+FROM inventory
+JOIN film ON inventory.film_id = film.film_id
+WHERE store_id = 1
+GROUP BY title;
+```
+
+gets language name and title of film
+```
+SELECT film.title, language.name AS movie_language
+FROM film
+JOIN language ON language.language_id = film.language_id;
+```
+
+In real workplace, people will remove AS, and leave space because it works.
+
+
