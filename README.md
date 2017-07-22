@@ -186,3 +186,19 @@ GROUP BY customer_id ORDER BY SUM(amount) DESC
 LIMIT 5;
 ```
 
+## Having
+like where clause but for group by condition
+examples
+
+```
+SELECT rating, AVG(rental_rate)
+FROM film
+WHERE rating in ('R', 'G', 'PG')
+GROUP BY rating
+HAVING AVG(rental_rate) < 3; 
+```
+select and use where clause to get rating no aggregate function
+then having to get having avg
+
+challenge
+
