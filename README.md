@@ -300,3 +300,63 @@ JOIN language ON language.language_id = film.language_id;
 In real workplace, people will remove AS, and leave space because it works.
 
 
+## Inner Join
+records only in Table A and Table B
+Intersection of Table A and Table B (also default JOIN)
+
+## FULL OUTER JOIN
+Table A + Table B
+missing records produce a null
+takes right and left table and puts in nulls
+
+## LEFT OUTER JOIN
+complete set of records from A
+first table A returns all rows from table A
+if no match, return with null
+
+## RIGHT OUTER JOIN
+table B is included by not from table A
+
+## LEFT OUTER JOIN with WHERE
+check if records are null
+```
+SELECT * FROM TableA
+LEFT OUTER JOIN TableB
+ON TableA.name = TableB.name
+WHERE TableB.id IS null
+```
+so you then get those things in A but Not in B
+
+## FULL OUTER JOIN with WHERE
+only records where they don't match up
+```
+SELECT * FROM TableA
+FULL OUTER JOIN TableB
+ON TableA.name = TableB.name
+WHERE TableA.id IS null
+OR TableB.id IS null
+```
+
+Find all films which are not in inventory
+```
+SELECT film.film_id, film.title, inventory_id
+FROM film
+LEFT OUTER JOIN inventory ON inventory.film_id = film.film_id
+WHERE inventory.film_id IS NULL;
+``
+
+
+## UNION
+both same number of cols in tables must be returned
+and select col 1 must be same col data types
+removes duplicates
+
+```
+SELECT * FROM salesa
+UNION
+SELECT * FROM salesb
+```
+UNION ALL --> to get all results even the duplicated rows
+
+
+
