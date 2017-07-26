@@ -343,7 +343,7 @@ SELECT film.film_id, film.title, inventory_id
 FROM film
 LEFT OUTER JOIN inventory ON inventory.film_id = film.film_id
 WHERE inventory.film_id IS NULL;
-``
+```
 
 
 ## UNION
@@ -358,5 +358,16 @@ SELECT * FROM salesb
 ```
 UNION ALL --> to get all results even the duplicated rows
 
+
+## timestamps
+- extract( unit from date)
+you can extract day, dow, epoch, hour etc.
+
+```
+SELECT SUM(amount) As total, extract(month from payment_date) AS month
+FROM payment
+GROUP BY month
+ORDER BY total DESC;
+```
 
 
