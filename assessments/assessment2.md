@@ -32,7 +32,7 @@ How can you produce a list of members who joined after the start of September 20
 
 ```
 SELECT memid, surname, firstname, joindate FROM cd.members
-WHERE joindate > '2012-09-01';
+WHERE joindate >= '2012-09-01';
 ```
 
 How can you produce an ordered list of the first 10 surnames in the members table? The list must not contain duplicates.
@@ -49,6 +49,9 @@ SELECT joindate AS "signup date"
 FROM cd.members
 ORDER BY joindate DESC LIMIT 1;
 ```
+
+also
+`select max(joindate) as latest from cd.members;`
 
 
 Produce a count of the number of facilities that have a cost to guests of 10 or more.
@@ -71,6 +74,11 @@ WHERE date_part('month', b.starttime) = 9 AND date_part('year', b.starttime) = 2
 GROUP BY f.facid
 ORDER BY c DESC;
 ```
+ALSO
+```
+12. select facid, sum(slots) as "Total Slots" from cd.bookings where starttime >= '2012-09-01' and starttime < '2012-10-01' group by facid order by sum(slots);
+```
+
 
 Produce a list of facilities with more than 1000 slots booked. Produce an output table consisting of facility id and total slots, sorted by facility id.
 ```
@@ -82,6 +90,22 @@ order by facid;
 ```
 
 How can you produce a list of the start times for bookings for tennis courts, for the date '2012-09-21'? Return a list of start time and facility name pairings, ordered by the time.
+```
+SELECT name, starttime 
+FROM cd.bookings as b
+JOIN cd.facilities as f ON f.facid = b.facid
+WHERE f.facid IN (0,1) AND
+  starttime BETWEEN date '2012-09-21' AND date '2012-09-22'
+ORDER BY starttime;
+```
 
 
 How can you produce a list of the start times for bookings by members named 'David Farrell'?
+```
+SELECT starttime, CONCAT(firstname, ' ', surname) as fullname
+FROM cd.bookings as b
+JOIN cd.facilities as f ON f.facid = b.facid
+JOIN cd.members as m ON b.memid = m.memid
+WHERE CONCAT(firstname, ' ', surname) LIKE 'David Farrell'
+ORDER BY starttime ASC;
+```
