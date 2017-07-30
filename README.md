@@ -397,3 +397,26 @@ WHERE return_date BETWEEN '2005-05-29' AND '2005-05-30');
 ```
 
 above, use single string return comparison operator
+
+## self join
+col `employee_name` and `employee_location`
+this is more efficient to join table to itself than to use subquery.
+
+```
+Select e1.employee_name
+FROM employee AS e1, employee AS e2 // self join
+WHERE
+e1.employee_location = e2.employee_location
+AND e2.employee_name="Joe1";
+```
+self joins don't use JOIN terminology
+
+also can explicitly use JOIN
+```
+FROM customer AS a
+JOIN customer AS b
+ON a.first_name = b.last_name;
+```
+
+
+
