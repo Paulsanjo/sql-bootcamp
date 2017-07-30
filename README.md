@@ -418,5 +418,5 @@ JOIN customer AS b
 ON a.first_name = b.last_name;
 ```
 
-
+#
 
