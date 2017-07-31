@@ -418,5 +418,72 @@ JOIN customer AS b
 ON a.first_name = b.last_name;
 ```
 
-#
+## Assessment 2
+[See assessment 2](assessments/assessment2.md)
+
+
+# Drop Create Tables, etc
+
+## DataTypes PostgresSql
+- Boolean
+- Character
+- Number
+Temporal
+- Special like: Array
+
+## Boolean
+converting to true --> yes, 1, etc.
+converting to false --> no, 0, etc
+
+## Character
+fixed-length character strings: char(n)
+if string is shorter than length of column,
+  then pad with spaces
+if string is longer, error is thrown
+
+### why use this?
+  - enforce it so user cannot mess up ID code
+
+- variable-length char strings: varchar(n). Postgres does not padd with spaces if it is shorter than length n.
+
+## Number
+Integers, Floating Point Number
+smallint -/+ 3276832767 
+Integer 4-btye
+Serial <-- postgres populates the db with it
+
+Float. Preceision to n, up to max of 8 bytes
+real or float8 is double-precision (8-byte) floating point
+
+numeric(p,s) real number with s nmber after the decimal point.
+numeric(p,) is the exact number
+
+Temporal,
+ date
+time
+interval
+timestamp
+timestamptz 
+
+
+## PRIMARY AND FOREIGN KEYS
+primary key constraints
+only one primary key 
+constraints = PRIMAY KEY
+
+foreign key is a field or cols which is primary key of another table
+REFERENCING TABLE
+
+you can inherit from existing table
+
+`CREATE TABLE table_name (column name TYPE column_constraint table_contstraint);`
+
+## CONSTRAINTS
+UNIQUE across whole table
+null value is unique
+NOT NULL
+PRIMARY KEY == NOT NULL AND UNIQUE
+
+- CHECK enables condition when you update data
+- REFERENCES foreign key constraint
 
